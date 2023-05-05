@@ -26,6 +26,7 @@ public class ClasePersona {
                 
                 
                 //error
+                //error
                 System.out.println("Procesado: " + persona.getNombre() + " " + persona.getApellidos() + "  nacido el " + persona.getFechaNacimiento());
             } catch (IllegalArgumentException ex) {
                 System.out.println("ERROR. Procesando siguiente persona");
