@@ -84,4 +84,41 @@ public class Persona {
         return fechaCorrecta;
     }
 
+    public int getEdadEnFecha(String cadenaFecha) throws IllegalArgumentException {
+        int edad = 0;
+
+        if (this.fechaNacimiento == null || this.fechaNacimiento.isAfter(generarFecha(cadenaFecha))) {
+            edad = -1;
+        } else {
+            edad = generarFecha(cadenaFecha).getYear() - this.fechaNacimiento.getYear();
+            if (generarFecha(cadenaFecha).getMonthValue() < this.fechaNacimiento.getMonthValue()) {
+                edad = edad - 1;
+            }
+            if (generarFecha(cadenaFecha).getMonthValue() == this.fechaNacimiento.getMonthValue()) {
+                if (generarFecha(cadenaFecha).getDayOfMonth() < this.fechaNacimiento.getDayOfMonth()) {
+                    edad = edad - 1;
+                }
+            }
+        }
+
+        return edad;
+    }
+
+    public int getEdad() {
+        int edad = 0;
+        if (this.fechaNacimiento == null || this.fechaNacimiento.isAfter(LocalDate.now())) {
+            edad = -1;
+        } else {
+            edad = LocalDate.now().getYear() - this.fechaNacimiento.getYear();
+            if (LocalDate.now().getMonthValue() < this.fechaNacimiento.getMonthValue()) {
+                edad = edad - 1;
+            }
+            if (LocalDate.now().getMonthValue() == this.fechaNacimiento.getMonthValue()) {
+                if (LocalDate.now().getDayOfMonth() < this.fechaNacimiento.getDayOfMonth()) {
+                    edad = edad - 1;
+                }
+            }
+        }
+        return edad;
+    }
 }
