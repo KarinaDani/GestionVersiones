@@ -9,8 +9,7 @@ public class ClasePersona {
         int personasConFecha = 0;
 
         Persona persona = null;
-        String nombre, apellidos, fechaNacimiento, fechaProcesar;
-        int cantidadFechas = 0;
+        String nombre, apellidos, fechaNacimiento;
         int edad = 0;
 
         personasConFecha = sc.nextInt();
@@ -23,25 +22,12 @@ public class ClasePersona {
             fechaNacimiento = sc.nextLine();
             try {
                 persona = new Persona(nombre, apellidos, fechaNacimiento);
-                
-                cantidadFechas = sc.nextInt();
-                sc.nextLine();
-                for (int j = 0; j < cantidadFechas; j++) {
 
-                    fechaProcesar = sc.nextLine();
-
-                    try {
-                        edad = persona.getEdadEnFecha(fechaProcesar);
-                        if (edad == -1) {
-                            System.out.println(persona.getNombre() + " " + persona.getApellidos() + " aun no ha nacido a fecha " + fechaProcesar);
-                        } else {
-                            System.out.println(persona.getNombre() + " " + persona.getApellidos() + " tendra " + edad + " anyos en fecha " + fechaProcesar);
-                        }
-
-                    } catch (IllegalArgumentException ex) {
-                        System.out.println("ERROR. Procesando siguiente fecha");
-                    }
-
+                edad = persona.getEdad();
+                if (edad == -1) {
+                    System.out.println(persona.getNombre() + " " + persona.getApellidos() + " aun no ha nacido a dia de hoy");
+                } else {
+                    System.out.println(persona.getNombre() + " " + persona.getApellidos() + " tiene " + edad + " anyos a dia de hoy");
                 }
 
             } catch (IllegalArgumentException ex) {
