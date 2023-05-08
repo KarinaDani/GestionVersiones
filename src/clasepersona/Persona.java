@@ -2,6 +2,7 @@ package clasepersona;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Persona {
 
@@ -24,6 +25,41 @@ public class Persona {
         this.fechaNacimiento = generarFecha(fechaNacimiento);
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 79 * hash + Objects.hashCode(this.nombre);
+        hash = 79 * hash + Objects.hashCode(this.apellidos);
+        hash = 79 * hash + Objects.hashCode(this.fechaNacimiento);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Persona other = (Persona) obj;
+        if (!Objects.equals(this.nombre, other.nombre)) {
+            return false;
+        }
+        if (!Objects.equals(this.apellidos, other.apellidos)) {
+            return false;
+        }
+        return Objects.equals(this.fechaNacimiento, other.fechaNacimiento);
+    }
+
+    @Override
+    public String toString() {
+        return "Persona{" + "nombre=" + nombre + ", apellidos=" + apellidos + ", fechaNacimiento=" + fechaNacimiento + '}';
+    }
+    
     public String getNombre() {
         return nombre;
     }

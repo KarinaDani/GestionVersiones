@@ -6,29 +6,35 @@ public class ClasePersona {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int personasConFecha = 0;
+        int personas = 0;
 
         Persona persona = null;
+        Persona personaAnterior = null;
         String nombre, apellidos, fechaNacimiento;
         int edad = 0;
 
-        personasConFecha = sc.nextInt();
+        personas = sc.nextInt();
 
         sc.nextLine();
 
-        for (int i = 0; i < personasConFecha; i++) {
+        for (int i = 0; i < personas; i++) {
             nombre = sc.nextLine();
             apellidos = sc.nextLine();
             fechaNacimiento = sc.nextLine();
             try {
                 persona = new Persona(nombre, apellidos, fechaNacimiento);
 
-                edad = persona.getEdad();
-                if (edad == -1) {
-                    System.out.println(persona.getNombre() + " " + persona.getApellidos() + " aun no ha nacido a dia de hoy");
-                } else {
-                    System.out.println(persona.getNombre() + " " + persona.getApellidos() + " tiene " + edad + " anyos a dia de hoy");
+                if (i > 0 && personaAnterior != null) {
+                    if (persona.equals(personaAnterior)) {
+                        System.out.println(persona.toString() + " y "
+                                + personaAnterior.toString() + " son la misma");
+                    } else {
+                        System.out.println(persona.toString() + " y "
+                                + personaAnterior.toString() + " son distintas");
+                    }
                 }
+
+                personaAnterior = new Persona(nombre, apellidos, fechaNacimiento);
 
             } catch (IllegalArgumentException ex) {
                 System.out.println("ERROR. Procesando siguiente persona");
