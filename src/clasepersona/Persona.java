@@ -7,13 +7,7 @@ public class Persona {
 
     private String nombre;
     private String apellidos;
-    private LocalDate fechaDeNacimiento;
-
-    public Persona(String nombre, String apellidos, String fechaNacimiento) throws IllegalArgumentException {
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.fechaDeNacimiento = generarFecha(fechaNacimiento);
-    }
+    private LocalDate fechaNacimiento;
 
     public Persona(String nombre, String apellidos) {
         if (nombre.length() == 0 || apellidos.length() == 0) {
@@ -22,6 +16,12 @@ public class Persona {
             this.nombre = nombre;
             this.apellidos = apellidos;
         }
+    }
+
+    public Persona(String nombre, String apellidos, String fechaNacimiento) throws IllegalArgumentException {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.fechaNacimiento = generarFecha(fechaNacimiento);
     }
 
     public String getNombre() {
@@ -34,7 +34,7 @@ public class Persona {
 
     public String getFechaNacimiento() throws IllegalArgumentException {
         String fecha;
-        if (this.fechaDeNacimiento == null) {
+        if (this.fechaNacimiento == null) {
             fecha = null;
         } else {
             fecha = getFechaNacimiento('-');
@@ -42,22 +42,22 @@ public class Persona {
         return fecha;
     }
 
-    String getFechaNacimiento(char separador) {
+    public String getFechaNacimiento(char separador) {
         String fecha = null;
 
         if (separador != '-' && separador != '/') {
             throw new IllegalArgumentException();
         } else {
-            if (this.fechaDeNacimiento != null) {
-                fecha = String.format("%02d%c%02d%c%04d", this.fechaDeNacimiento.getDayOfMonth(), separador, this.fechaDeNacimiento.getMonth(), separador, this.fechaDeNacimiento.getYear());
+            if (this.fechaNacimiento != null) {
+                fecha = String.format("%02d%c%02d%c%04d", this.fechaNacimiento.getDayOfMonth(), separador, this.fechaNacimiento.getMonthValue(), separador, this.fechaNacimiento.getYear());
             }
         }
 
         return fecha;
     }
 
-    public void setFechaDeNacimiento(String fechaDeNacimiento) {
-        this.fechaDeNacimiento = generarFecha(fechaDeNacimiento);
+    public void setFechaNacimiento(String fechaNacimiento) {
+        this.fechaNacimiento = generarFecha(fechaNacimiento);
     }
 
     private LocalDate generarFecha(String fecha) {
@@ -72,7 +72,7 @@ public class Persona {
 
             dia = Integer.parseInt(fecha.substring(0, 2));
             mes = Integer.parseInt(fecha.substring(3, 5));
-            anyo = Integer.parseInt(fecha.substring(6, 10));
+            anyo = Integer.parseInt(fecha.substring(6));
 
             try {
                 fechaCorrecta = LocalDate.of(anyo, mes, dia);
