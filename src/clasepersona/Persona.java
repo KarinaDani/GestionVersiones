@@ -10,6 +10,12 @@ public class Persona {
     private String apellidos;
     private LocalDate fechaNacimiento;
 
+    public Persona(String nombre, String apellidos, String fechaNacimiento) throws IllegalArgumentException {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.fechaNacimiento = generarFecha(fechaNacimiento);
+    }
+
     public Persona(String nombre, String apellidos) {
         if (nombre.length() == 0 || apellidos.length() == 0) {
             throw new IllegalArgumentException();
@@ -17,12 +23,6 @@ public class Persona {
             this.nombre = nombre;
             this.apellidos = apellidos;
         }
-    }
-
-    public Persona(String nombre, String apellidos, String fechaNacimiento) throws IllegalArgumentException {
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.fechaNacimiento = generarFecha(fechaNacimiento);
     }
 
     @Override
@@ -59,7 +59,7 @@ public class Persona {
     public String toString() {
         return "Persona{" + "nombre=" + nombre + ", apellidos=" + apellidos + ", fechaNacimiento=" + fechaNacimiento + '}';
     }
-    
+
     public String getNombre() {
         return nombre;
     }
